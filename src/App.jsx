@@ -1,21 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import Projects from './components/Projects';
-import MyTimeline from './components/Feed';
-import Footer from './components/Footer';
+import Project from "./components/Projects";
+import Footer from "./components/Contact"
 
 const App = () => {
   return (
-    <>
+    <div className="App">
+      <Navbar />
       <Home />
-      <Projects />
-      <MyTimeline />
+      <Project />
       <Footer />
-    </>
+    </div>
   );
 };
 
 export default App;
+ 
