@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .upload-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .upload-section input[type="file"] {
+            margin-top: 10px;
+        }
+        .summary-section {
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #eef1f7;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .chart-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- File Upload Section -->
+            <label for="file-upload"><strong>Upload File (CSV/PDF):</strong></label><br>
+            <input type="file" name="file" id="file-upload"><br><br>
+            
+            <!-- Text Input Section -->
+            <label for="text-input"><strong>Enter your financial question:</strong></label><br>
+            <textarea name="text_input" placeholder="Ask a financial question..." rows="4" cols="50">{{ text_input }}</textarea><br><br>
+        
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+    {% if text_input %}
+    <h3>Question:</h3>
+    <p>{{ text_input }}</p>
+    {% endif %}
+
+    {% if table %}
+    <div class="summary-section">
+        <h2>Expense Summary</h2>
+        {{ table|safe }}
+    </div>
+    {% endif %}
+
+    {% if chart %}
+    <div class="chart-container">
+        <h2>Expense Visualization</h2>
+        <img src="data:image/png;base64,{{ chart }}" alt="Expense Chart" />
+    </div>
+    {% endif %}
+
+    {% if advice %}
+    <h3>Personalized Financial Advice:</h3>
+    <p>{{ advice }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
